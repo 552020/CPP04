@@ -2,7 +2,7 @@
 #include <iostream>
 
 // Default constructor
-Cat::Cat() : Animal("Animal") {
+Cat::Cat() : Animal("Cat") {
   std::cout << "Cat default constructor called" << std::endl;
 }
 // Copy constructor

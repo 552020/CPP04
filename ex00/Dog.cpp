@@ -2,9 +2,8 @@
 
 #include <iostream>
 
-Dog::Dog() : Animal("Animal") {
+Dog::Dog() : Animal("Dog") {
   std::cout << "Dog default constructor called" << std::endl;
-  type = "Dog";
 }
 Dog::Dog(const Dog &source) : Animal(source) {
   std::cout << "Dog copy constructor called" << std::endl;
