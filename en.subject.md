@@ -126,6 +126,7 @@ Don’t forget to check for memory leaks.
 A copy of a Dog or a Cat mustn’t be shallow. Thus, you have to test that your copies
 are deep copies!
 
+```c++
 int main()
 {
 const Animal* j = new Dog();
@@ -136,13 +137,15 @@ delete i;
 }
 
 return 0;
+```
 
 Implement and turn in more tests than the ones given above.
 
-Chapter V
+## Chapter V
+
 Exercise 02: Abstract class
 Exercise : 02
-Abstract class
+**Abstract class**
 Turn-in directory : ex02/
 Files to turn in : Files from previous exercise + _.cpp, _.{h, hpp}
 Forbidden functions : None
@@ -152,9 +155,8 @@ To avoid any possible mistakes, the default Animal class should not be instantia
 Fix the Animal class so nobody can instantiate it. Everything should work as before.
 If you want to, you can update the class name by adding a A prefix to Animal.
 
-9
+## Chapter VI
 
-Chapter VI
 Exercise 03: Interface & recap
 Exercise : 03
 Interface & recap
