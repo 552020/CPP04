@@ -6,7 +6,7 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 TARGET = brain
 
 # Source and Object Files
-SRCS = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
+SRCS = main.cpp Amateria.cpp Ice.cpp Cure.cpp 
 
 # Create an obj directory if it doesn't exist
 OBJDIR = obj
@@ -25,7 +25,6 @@ $(OBJS): | $(OBJDIR)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
-
 # Compile source files to object files in the obj directory
 $(OBJDIR)/%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@

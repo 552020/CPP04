@@ -3,17 +3,18 @@
 
 #include <iostream>
 
-class Brain {
-private:
-  std::string ideas[100];
+class Brain
+{
+  private:
+	std::string ideas[100];
 
-public:
-  Brain();
-  Brain(const Brain &src);
-  Brain &operator=(const Brain &src);
-  ~Brain();
-  void setIdea(std::string idea);
-  std::string *getIdeas();
+  public:
+	Brain();
+	Brain(const Brain &src);
+	Brain &operator=(const Brain &src);
+	~Brain();
+	void setIdea(std::string idea);
+	std::string *getIdeas();
 };
 
 #endif

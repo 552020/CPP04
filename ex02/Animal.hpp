@@ -3,19 +3,20 @@
 
 #include <string>
 
-class Animal {
-protected:
-  std::string type;
+class Animal
+{
+  protected:
+	std::string type;
 
-public:
-  Animal();
-  Animal(std::string type);
-  Animal(const Animal &source);
-  Animal &operator=(const Animal &source);
-  virtual ~Animal();
-  std::string getType() const;
-  // Note 1
-  virtual void makeSound() const = 0;
+  public:
+	Animal();
+	Animal(std::string type);
+	Animal(const Animal &source);
+	Animal &operator=(const Animal &source);
+	virtual ~Animal();
+	std::string getType() const;
+	// Note 1
+	virtual void makeSound() const = 0;
 };
 
 #endif

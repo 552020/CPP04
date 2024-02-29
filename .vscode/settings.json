@@ -1,11 +1,13 @@
 {
   "workbench.colorCustomizations": {
-    "activityBar.background": "#281980",
-    "titleBar.activeBackground": "#3822B3",
-    "titleBar.activeForeground": "#FBFBFE"
+    "activityBar.background": "#28197E",
+    "titleBar.activeBackground": "#3924B0",
+    "titleBar.activeForeground": "#FAF9FE"
   },
   "files.associations": {
+    "*.embeddedhtml": "html",
     ".clang-format-google": "c",
+    "ostream": "cpp",
     "__bit_reference": "cpp",
     "__config": "cpp",
     "__debug": "cpp",
@@ -45,7 +47,6 @@
     "mutex": "cpp",
     "new": "cpp",
     "optional": "cpp",
-    "ostream": "cpp",
     "ratio": "cpp",
     "sstream": "cpp",
     "stdexcept": "cpp",
