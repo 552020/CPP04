@@ -1,8 +1,32 @@
 #include "MateriaSource.hpp"
 #include "Character.hpp"
+#include "Debug.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"
 #include <iostream>
+
+void test_debug()
+{
+	Debug::enable(true);
+	Debug::setLevel(Debug::NORMAL);
+
+	// This will be logged
+	Debug::log("This is a NORMAL message.", Debug::NORMAL);
+	// This will not be logged
+	Debug::log("This is a OCF message.", Debug::OCF);
+
+	Debug::setLevel(Debug::OCF);
+	// This will be logged
+	Debug::log("This is a NORMAL message.", Debug::NORMAL);
+	// This will be logged
+	Debug::log("This is a OCF message.", Debug::OCF);
+
+	Debug::enable(false);
+	// This will not be logged
+	Debug::log("This is a NORMAL message.", Debug::NORMAL);
+	// This will not be logged
+	Debug::log("This is a OCF message.", Debug::OCF);
+}
 
 void test()
 {
@@ -57,6 +81,7 @@ void test()
 
 int main()
 {
+	test_debug();
 	IMateriaSource *src = new MateriaSource();
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());
