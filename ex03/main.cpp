@@ -1,3 +1,9 @@
+#include "MateriaSource.hpp"
+#include "Character.hpp"
+#include "Ice.hpp"
+#include "Cure.hpp"
+#include <iostream>
+
 int main()
 {
 	IMateriaSource *src = new MateriaSource();
@@ -17,3 +23,4 @@ int main()
 	delete src;
 
 	return 0;
+}

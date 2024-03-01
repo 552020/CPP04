@@ -8,6 +8,10 @@
 
 ## ex04
 
+### Abstract classes vs pure abstract classes (Interfaces)
+
+Abstract classes in C++ are classes that cannot be instantiated directly because they contain at least one pure virtual function. A pure virtual function is declared by assigning 0 to it in its declaration, like this: virtual void myFunction() = 0;. If a class has only pure virtual functions, it is considered to function similarly to an interface. While other languages, such as Java, have distinct constructs called 'Interfaces,' in C++, this distinction is terminological rather than qualitative. Interfaces in C++ are essentially abstract classes that contain only pure virtual functions."
+
 ## Concepts and Utilia
 
 ### Headers and Makefie

@@ -7,7 +7,7 @@ DEPFLAGS = -MMD -MP
 TARGET = AMateria
 
 # Source and Object Files
-SRCS = main.cpp AMateria.cpp Ice.cpp Cure.cpp ICharacter.cpp
+SRCS = main.cpp AMateria.cpp Ice.cpp Cure.cpp ICharacter.cpp Character.cpp MateriaSource.cpp
 
 # Create an obj directory if it doesn't exist
 OBJDIR = obj

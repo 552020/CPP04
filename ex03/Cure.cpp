@@ -10,17 +10,14 @@ Cure::Cure(Cure const &src) : AMateria("cure")
 Cure &Cure::operator=(Cure const &src)
 {
 	if (this != &src)
-	{
 		AMateria::operator=(src);
-		_type = src._type;
-	}
 	return *this;
 }
 
 AMateria *Cure::clone() const
 {
-	AMateria *clone = new Cure();
-	return clone;
+	AMateria *newCure = new Cure();
+	return newCure;
 }
 
 void Cure::use(ICharacter &target)

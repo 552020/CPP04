@@ -9,11 +9,13 @@ class Character : public ICharacter
 {
   private:
 	std::string _name;
+	// static in C++ means that the variable is shared between all instances of the class
+	// the member belongs to the class, not to the instance
 	static const int _inventorySize = MAX_INVENTORY;
 	AMateria *_inventory[_inventorySize];
 
-	// Helper function to deeply copy the inventory from another Character
-	void copyInventory(const Character &other);
+	// Extra helper function to deeply copy the inventory from another Character
+	void deepCopyInventory(const Character &other);
 
   public:
 	Character(std::string const &name);
