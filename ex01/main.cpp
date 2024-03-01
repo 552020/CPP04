@@ -33,7 +33,7 @@ int main()
 	}
 	std::cout << "*** " << nbrAnimals << " animals created ***\n" << std::endl;
 	// Demonstrating deep copy for Dog
-	std::cout << "--- Demonstrating deep copy for Dog ---\n" << std::endl;
+	std::cout << "--- Demonstrating deep copy for Dog's Copy Costructor ---\n" << std::endl;
 	std::cout << "Creating Dog 1 and setting an idea\n" << std::endl;
 	Dog dog1;
 	dog1.getBrain()->setIdea("Idea 1");
@@ -49,6 +49,30 @@ int main()
 	printDogIdeas(dog1);
 	std::cout << "Dog 2 (after adding new idea to Dog2) ideas: " << std::endl;
 	printDogIdeas(dog2);
+
+	std::cout << "\n--- Demonstrating deep copy for Dog's Assignation Operator ---\n" << std::endl;
+	std::cout << "Creating Dog 3 and setting an idea\n" << std::endl;
+	Dog dog3;
+	dog3.getBrain()->setIdea("Idea 3");
+	std::cout << "\nCreating Dog 4 and setting an idea\n" << std::endl;
+	Dog dog4;
+	dog4.getBrain()->setIdea("Idea 4");
+	std::cout << "Dog 3 ideas: " << std::endl;
+	printDogIdeas(dog3);
+	std::cout << "Dog 4 ideas: " << std::endl;
+	printDogIdeas(dog4);
+	std::cout << "\nAssigning Dog 3 to Dog 4\n" << std::endl;
+	dog4 = dog3;
+	std::cout << "Dog 3 ideas: " << std::endl;
+	printDogIdeas(dog3);
+	std::cout << "Dog 4 ideas: " << std::endl;
+	printDogIdeas(dog4);
+	std::cout << "\nSetting new idea int Dog4's brain\n" << std::endl;
+	dog4.getBrain()->setIdea("Idea 5");
+	std::cout << "Dog 3 ideas: " << std::endl;
+	printDogIdeas(dog3);
+	std::cout << "Dog 4 ideas: " << std::endl;
+	printDogIdeas(dog4);
 
 	std::cout << "\n--- Cleaning up ---\n" << std::endl;
 	for (int i = 0; i < nbrAnimals; i++)
