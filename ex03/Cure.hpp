@@ -1,11 +1,11 @@
 #ifndef CURE_HPP
 #define CURE_HPP
 
-#include "Amateria.hpp"
+#include "AMateria.hpp"
 #include "ICharacter.hpp"
 #include <iostream>
 
-class Cure : public Amateria
+class Cure : public AMateria
 {
   public:
 	Cure();
@@ -13,7 +13,7 @@ class Cure : public Amateria
 	Cure &operator=(Cure const &src);
 	virtual ~Cure();
 
-	virtual Amateria *clone() const;
+	virtual AMateria *clone() const;
 	virtual void use(ICharacter &target);
 };
 

@@ -3,21 +3,23 @@
 
 #include <iostream>
 #include <string>
+#include "ICharacter.hpp"
 
-class Amateria {
-protected:
-  std::string _type;
+class AMateria
+{
+  protected:
+	std::string _type;
 
-public:
-  Amateria();
-  Amateria(std::string const &type);
-  Amateria(Amateria const &src);
-  Amateria &operator=(Amateria const &src);
-  virtual ~Amateria();
+  public:
+	AMateria();
+	AMateria(std::string const &type);
+	AMateria(AMateria const &src);
+	AMateria &operator=(AMateria const &src);
+	virtual ~AMateria();
 
-  std::string const &getType() const; // Returns the materia type
-  virtual Amateria *clone() const = 0;
-  virtual void use(ICharacter &target);
+	std::string const &getType() const; // Returns the materia type
+	virtual AMateria *clone() const = 0;
+	virtual void use(ICharacter &target);
 };
 
 #endif

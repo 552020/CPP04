@@ -1,12 +1,13 @@
 # Compiler and Flags
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+DEPFLAGS = -MMD -MP
 
 # Target executable name
-TARGET = brain
+TARGET = AMateria
 
 # Source and Object Files
-SRCS = main.cpp Amateria.cpp Ice.cpp Cure.cpp 
+SRCS = main.cpp AMateria.cpp Ice.cpp Cure.cpp ICharacter.cpp
 
 # Create an obj directory if it doesn't exist
 OBJDIR = obj
@@ -27,7 +28,9 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)
 # Compile source files to object files in the obj directory
 $(OBJDIR)/%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(DEPFLAGS) -c $< -o $@
+
+-include $(DEPS)
 
 clean:
 	rm -rf $(OBJDIR)

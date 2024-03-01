@@ -1,22 +1,25 @@
 #include "Cure.hpp"
 
-Cure::Cure() : Amateria("cure")
+Cure::Cure() : AMateria("cure")
 {
 }
-Cure::Cure(Cure const &src) : Amateria("cure")
+Cure::Cure(Cure const &src) : AMateria("cure")
 {
 	*this = src;
 }
 Cure &Cure::operator=(Cure const &src)
 {
 	if (this != &src)
+	{
+		AMateria::operator=(src);
 		_type = src._type;
+	}
 	return *this;
 }
 
-Amateria *Cure::clone() const
+AMateria *Cure::clone() const
 {
-	Amateria *clone = new Cure();
+	AMateria *clone = new Cure();
 	return clone;
 }
 

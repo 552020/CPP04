@@ -29,7 +29,9 @@ $(OBJDIR):
 
 # Compile source files to object files in the obj directory
 $(OBJDIR)/%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(DEPFLAGS) -c $< -o $@
+
+-include $(DEPS)
 
 clean:
 	rm -rf $(OBJDIR)

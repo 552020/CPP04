@@ -1,21 +1,24 @@
 #include "Ice.hpp"
 
-Ice::Ice() : Amateria("ice")
+Ice::Ice() : AMateria("ice")
 {
 }
-Ice::Ice(Ice const &src) : Amateria("ice")
+Ice::Ice(Ice const &src) : AMateria("ice")
 {
 	*this = src;
 }
 Ice &Ice::operator=(Ice const &src)
 {
 	if (this != &src)
+	{
+		AMateria::operator=(src);
 		_type = src._type;
+	}
 	return *this;
 }
-Amateria *Ice::clone() const
+AMateria *Ice::clone() const
 {
-	Amateria *clone = new Ice();
+	AMateria *clone = new Ice();
 	return clone;
 }
 void Ice::use(ICharacter &target)
