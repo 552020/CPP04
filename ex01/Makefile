@@ -1,6 +1,7 @@
 # Compiler and Flags
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+DEPFLAGS = -MMD -MP
 
 # Target executable name
 TARGET = brain

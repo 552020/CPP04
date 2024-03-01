@@ -1,7 +1,6 @@
 #include "Brain.hpp"
 #include <iostream>
 
-// Default constructor
 Brain::Brain()
 {
 	for (int i = 0; i < 100; i++)
@@ -23,7 +22,6 @@ Brain &Brain::operator=(const Brain &src)
 	std::cout << "Brain copy assignment operator called" << std::endl;
 	return *this;
 }
-// Destructor
 Brain::~Brain()
 {
 	std::cout << "Brain destructor called" << std::endl;

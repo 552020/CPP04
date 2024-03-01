@@ -1,12 +1,13 @@
 # Compiler and Flags
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+DEPFLAGS = -MMD -MP
 
 # Target executable name
-TARGET = brain
+TARGET = abstract
 
 # Source and Object Files
-SRCS = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
+SRCS = main.cpp AAnimal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 
 # Create an obj directory if it doesn't exist
 OBJDIR = obj

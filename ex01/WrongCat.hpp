@@ -9,6 +9,8 @@ class WrongCat : public WrongAnimal
 	WrongCat(const WrongCat &source);
 	WrongCat &operator=(const WrongCat &source);
 	virtual ~WrongCat();
+
+	void makeSound() const;
 };
 
 #endif

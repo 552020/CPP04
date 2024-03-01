@@ -1,9 +1,4 @@
-// This is only about the pure virtual function, the rest of the code is the
-// same
-// as in ex01. The difference is that the Animal class is now abstract, and it
-// cannot be instantiated. This is because the makeSound() function is pure
-
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
 #include "WrongAnimal.hpp"
@@ -11,54 +6,55 @@
 
 #include <iostream>
 
+#define ANIMALS_NBR 10
+
+void printDogIdeas(Dog &dog)
+{
+	for (int i = 0; i < 100; i++)
+	{
+		std::string dogIdea = dog.getBrain()->getIdeas()[i];
+		if (dogIdea != "")
+			std::cout << dogIdea << std::endl;
+	}
+}
+
 int main()
 {
-	const int nbrCatsAndDogs = 10;
-	// Note 1
-	Animal *animals[nbrCatsAndDogs];
-	for (int i = 0; i < nbrCatsAndDogs; i++)
+	const int nbrAnimals = ANIMALS_NBR;
+
+	std::cout << "Trying to instantiate an abstract class AAnimal" << std::endl;
+	// AAnimal animal; // This line will not compile
+	AAnimal *animals[nbrAnimals];
+	std::cout << "--- Creating " << nbrAnimals << " animals ---\n" << std::endl;
+	for (int i = 0; i < nbrAnimals; i++)
 	{
 		if (i % 2 == 0)
 			animals[i] = new Cat();
 		else
 			animals[i] = new Dog();
 	}
+	std::cout << "*** " << nbrAnimals << " animals created ***\n" << std::endl;
 	// Demonstrating deep copy for Dog
+	std::cout << "--- Demonstrating deep copy for Dog ---\n" << std::endl;
+	std::cout << "Creating Dog 1 and setting an idea\n" << std::endl;
 	Dog dog1;
 	dog1.getBrain()->setIdea("Idea 1");
+	std::cout << "\nCreating Dog 2 by copying Dog 1\n" << std::endl;
 	Dog dog2(dog1);
+	std::cout << "Dog 1 (just after copy) ideas: " << std::endl;
+	printDogIdeas(dog1);
+	std::cout << "Dog 2 (just after copy) ideas: " << std::endl;
+	printDogIdeas(dog2);
+	std::cout << "\nSetting new idea int Dog2's brain\n" << std::endl;
 	dog2.getBrain()->setIdea("Idea 2");
-	std::cout << "Dog 1 ideas: " << std::endl;
-	for (int i = 0; i < 100; i++)
-		std::cout << dog1.getBrain()->getIdeas()[i] << std::endl;
-	std::cout << "Dog 2 ideas: " << std::endl;
-	for (int i = 0; i < 100; i++)
-		std::cout << dog2.getBrain()->getIdeas()[i] << std::endl;
+	std::cout << "Dog 1 (after adding new idea to Dog2) ideas: " << std::endl;
+	printDogIdeas(dog1);
+	std::cout << "Dog 2 (after adding new idea to Dog2) ideas: " << std::endl;
+	printDogIdeas(dog2);
 
-	// Clean up and call the appropriate destructors
-	for (int i = 0; i < nbrCatsAndDogs; i++)
+	std::cout << "\n--- Cleaning up ---\n" << std::endl;
+	for (int i = 0; i < nbrAnimals; i++)
 		delete animals[i];
-
-	//   const Animal *meta = new Animal();
-	//   const Animal *j = new Dog();
-	//   const Animal *i = new Cat();
-
-	//   const WrongAnimal *meta2 = new WrongAnimal();
-	//   const WrongAnimal *j2 = new WrongCat();
-
-	//   std::cout << j->getType() << " " << std::endl; // will output the dog's
-	//   type std::cout << i->getType() << " " << std::endl; // will output the
-	//   cat's type i->makeSound();                                // will output
-	//   the cat sound! j->makeSound(); meta->makeSound();
-
-	//   std::cout << j2->getType() << " " << std::endl; // will output the dog's
-	//   type j2->makeSound(); std::cout << meta2->getType() << " "
-	//             << std::endl; // will output the cat's type
-	//   meta2->makeSound();
 
 	return (0);
 }
-
-/* Note 1
-A pointer to the base class can point to a derived class object.
-*/

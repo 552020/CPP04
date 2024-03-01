@@ -18,9 +18,9 @@ Dog &Dog::operator=(const Dog &source)
 	std::cout << "Dog assignment operator called" << std::endl;
 	if (this != &source)
 	{
+		Animal::operator=(source);
 		delete brain;
 		brain = new Brain(*source.brain);
-		this->type = source.type;
 	}
 	return *this;
 }

@@ -2,13 +2,13 @@
 #include <iostream>
 
 // Default constructor
-Cat::Cat() : Animal("Cat")
+Cat::Cat() : AAnimal("Cat")
 {
 	std::cout << "Cat default constructor called" << std::endl;
 	brain = new Brain();
 }
 // Copy constructor
-Cat::Cat(const Cat &source) : Animal(source)
+Cat::Cat(const Cat &source) : AAnimal(source)
 {
 	std::cout << "Cat copy constructor called" << std::endl;
 	brain = new Brain(*source.brain);

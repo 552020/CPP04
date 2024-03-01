@@ -1,19 +1,21 @@
-#ifndef ANIMAL_HPP
-#define ANIMAL_HPP
+#ifndef AANIMAL_HPP
+#define AANIMAL_HPP
 
 #include <string>
 
-class Animal
+// To make a class abstract and thus not instantiable directly, you need to declare at least one member function as a
+// pure virtual function.
+class AAnimal
 {
   protected:
 	std::string type;
 
   public:
-	Animal();
-	Animal(std::string type);
-	Animal(const Animal &source);
-	Animal &operator=(const Animal &source);
-	virtual ~Animal();
+	AAnimal();
+	AAnimal(std::string type);
+	AAnimal(const AAnimal &source);
+	AAnimal &operator=(const AAnimal &source);
+	virtual ~AAnimal();
 	std::string getType() const;
 	// Note 1
 	virtual void makeSound() const = 0;
