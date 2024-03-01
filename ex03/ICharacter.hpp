@@ -9,11 +9,6 @@ class AMateria;
 class ICharacter
 {
   public:
-	// to respect the orthodox canonical form
-	ICharacter();
-	ICharacter(const ICharacter &);
-	ICharacter &operator=(const ICharacter &);
-	// from the subject
 	virtual ~ICharacter();
 	virtual std::string const &getName() const = 0;
 	virtual void equip(AMateria *m) = 0;

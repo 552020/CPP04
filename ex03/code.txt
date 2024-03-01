@@ -1,65 +1,9 @@
-#include "AMateria.hpp"
-
-AMateria::AMateria() : _type("amateria")
-{
-}
-AMateria::AMateria(std::string const &type) : _type(type)
-{
-}
-AMateria::AMateria(AMateria const &src) : _type(src._type)
-{
-}
-AMateria &AMateria::operator=(AMateria const &src)
-{
-	if (this != &src)
-		_type = src._type;
-	return *this;
-}
-AMateria::~AMateria()
-{
-}
-
-std::string const &AMateria::getType() const
-{
-	return _type;
-}
-void AMateria::use(ICharacter &target)
-{
-	std::cout << this->_type << " shoots some materia at " << target.getName() << std::endl;
-	std::cout << "The materia does nothing!" << std::endl;
-	std::cout << "We don't know what an 'raw' materia is, and if a character can shoot it!" << std::endl;
-	std::cout << "But since since this is not a pure virtual function, we have to implement it!" << std::endl;
-}#ifndef AMATERIA_HPP
-#define AMATERIA_HPP
-
-#include <iostream>
-#include <string>
-#include "ICharacter.hpp"
-
-class AMateria
-{
-  protected:
-	std::string _type;
-
-  public:
-	AMateria();
-	AMateria(std::string const &type);
-	AMateria(AMateria const &src);
-	AMateria &operator=(AMateria const &src);
-	virtual ~AMateria();
-
-	std::string const &getType() const;
-	virtual AMateria *clone() const = 0;
-	virtual void use(ICharacter &target);
-};
-
-#endif#include "Character.hpp"
+#include "Character.hpp"
 #include "AMateria.hpp"
 #include <iostream>
 
 Character::Character(const std::string &name) : _name(name)
 {
-	std::cout << "Character constructor called." << std::endl;
 	for (int i = 0; i < _inventorySize; ++i)
 	{
 		_inventory[i] = NULL;
@@ -68,13 +12,11 @@ Character::Character(const std::string &name) : _name(name)
 
 Character::Character(const Character &other) : _name(other._name)
 {
-	std::cout << "Character copy constructor called." << std::endl;
 	deepCopyInventory(other);
 }
 
 Character &Character::operator=(const Character &other)
 {
-	std::cout << "Character copy assignment operator called." << std::endl;
 	if (this != &other)
 	{
 		_name = other._name;
@@ -93,7 +35,6 @@ Character &Character::operator=(const Character &other)
 
 Character::~Character()
 {
-	std::cout << "Character destructor called." << std::endl;
 	for (int i = 0; i < _inventorySize; ++i)
 	{
 		if (_inventory[i] != NULL)
@@ -117,14 +58,14 @@ void Character::equip(AMateria *m)
 		if (_inventory[i] == NULL)
 		{
 			_inventory[i] = m;
-			std::cout << m->getType() << "has been equipped to " << _name << std::endl;
+			// std::cout << m->getType() << "has been equipped to " << _name << std::endl;
 			break;
 		}
 		i++;
 	}
 	if (i == _inventorySize)
 	{
-		std::cout << "Inventory is full! " << m->getType() << "has not been equippd to " << _name << std::endl;
+		// std::cout << "Inventory is full! " << m->getType() << "has not been equippd to " << _name << std::endl;
 	}
 }
 
@@ -200,77 +141,14 @@ class Character : public ICharacter
 	void use(int idx, ICharacter &target);
 };
 
-#endif#include "Cure.hpp"
-
-Cure::Cure() : AMateria("cure")
-{
-}
-Cure::Cure(Cure const &src) : AMateria("cure")
-{
-	*this = src;
-}
-Cure &Cure::operator=(Cure const &src)
-{
-	if (this != &src)
-		AMateria::operator=(src);
-	return *this;
-}
-
-AMateria *Cure::clone() const
-{
-	AMateria *newCure = new Cure();
-	return newCure;
-}
-
-void Cure::use(ICharacter &target)
-{
-	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
-}
-
-Cure::~Cure()
-{
-}#ifndef CURE_HPP
-#define CURE_HPP
-
-#include "AMateria.hpp"
-#include "ICharacter.hpp"
-#include <iostream>
-
-class Cure : public AMateria
-{
-  public:
-	Cure();
-	Cure(Cure const &src);
-	Cure &operator=(Cure const &src);
-	virtual ~Cure();
-
-	virtual AMateria *clone() const;
-	virtual void use(ICharacter &target);
-};
-
 #endif
 #include <iostream>
 #include "ICharacter.hpp"
-
-ICharacter::ICharacter()
-{
-	std::cout << "ICharacter default constructor called." << std::endl;
-}
-
-ICharacter::ICharacter(const ICharacter &)
-{
-	std::cout << "ICharacter copy constructor called." << std::endl;
-}
-
-ICharacter &ICharacter::operator=(const ICharacter &)
-{
-	std::cout << "ICharacter copy assignment operator called." << std::endl;
-	return *this;
-}
+#include "Debug.hpp"
 
 ICharacter::~ICharacter()
 {
-	std::cout << "ICharacter destructor called." << std::endl;
+	Debug::log("An ICharacter object has been destroyed.", Debug::OCF);
 }
 #ifndef ICHARACTER_HPP
 #define ICHARACTER_HPP
@@ -283,11 +161,6 @@ class AMateria;
 class ICharacter
 {
   public:
-	// to respect the orthodox canonical form
-	ICharacter();
-	ICharacter(const ICharacter &);
-	ICharacter &operator=(const ICharacter &);
-	// from the subject
 	virtual ~ICharacter();
 	virtual std::string const &getName() const = 0;
 	virtual void equip(AMateria *m) = 0;
@@ -295,236 +168,4 @@ class ICharacter
 	virtual void use(int idx, ICharacter &target) = 0;
 };
 
-#endif#include "AMateria.hpp"
-
-class IMateriaSource
-{
-  public:
-	virtual ~IMateriaSource()
-	{
-	}
-	virtual void learnMateria(AMateria *) = 0;
-	virtual AMateria *createMateria(std::string const &type) = 0;
-};#include "Ice.hpp"
-
-Ice::Ice() : AMateria("ice")
-{
-}
-Ice::Ice(Ice const &src) : AMateria("ice")
-{
-	*this = src;
-}
-Ice &Ice::operator=(Ice const &src)
-{
-	if (this != &src)
-		AMateria::operator=(src);
-	return *this;
-}
-AMateria *Ice::clone() const
-{
-	AMateria *newIce = new Ice();
-	return newIce;
-}
-void Ice::use(ICharacter &target)
-{
-	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
-}
-Ice::~Ice()
-{
-}#ifndef ICE_HPP
-#define ICE_HPP
-
-#include "AMateria.hpp"
-#include "ICharacter.hpp"
-
-class Ice : public AMateria
-{
-  public:
-	Ice();
-	Ice(Ice const &src);
-	Ice &operator=(Ice const &src);
-	virtual ~Ice();
-
-	virtual AMateria *clone() const;
-	virtual void use(ICharacter &target);
-};
-
-#endif# Compiler and Flags
-CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-DEPFLAGS = -MMD -MP
-
-# Target executable name
-TARGET = AMateria
-
-# Source and Object Files
-SRCS = main.cpp AMateria.cpp Ice.cpp Cure.cpp ICharacter.cpp Character.cpp MateriaSource.cpp
-
-# Create an obj directory if it doesn't exist
-OBJDIR = obj
-
-# Generate object files from source files in the obj directory
-OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
-# Build Rules
-
-all: $(TARGET)
-
-
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
-
-$(OBJS): | $(OBJDIR)
-
-$(OBJDIR):
-	mkdir -p $(OBJDIR)
-# Compile source files to object files in the obj directory
-$(OBJDIR)/%.o: %.cpp
-	$(CXX) $(CXXFLAGS) $(DEPFLAGS) -c $< -o $@
-
--include $(DEPS)
-
-clean:
-	rm -rf $(OBJDIR)
-	rm -f $(OBJS) $(TARGET) 
-
-fclean: clean
-	rm -f $(TARGET) 
-
-re: fclean all
-
-.PHONY: all  clean fclean re
-#include "MateriaSource.hpp"
-#include <iostream>
-
-MateriaSource::MateriaSource()
-{
-	std::cout << "MateriaSource constructor called." << std::endl;
-	for (int i = 0; i < MAX_MATERIAS; ++i)
-	{
-		_inventory[i] = NULL;
-	}
-}
-
-MateriaSource::MateriaSource(const MateriaSource &src)
-{
-	std::cout << "MateriaSource copy constructor called." << std::endl;
-	for (int i = 0; i < MAX_MATERIAS; ++i)
-	{
-		if (src._inventory[i])
-			_inventory[i] = src._inventory[i]->clone();
-		else
-			_inventory[i] = NULL;
-	}
-}
-// Using here another denominator for parameter name. Normally I have src or other. Here I have rhs.
-MateriaSource &MateriaSource::operator=(const MateriaSource &rhs)
-{
-	std::cout << "MateriaSource copy assignment operator called." << std::endl;
-	if (this != &rhs)
-	{
-		for (int i = 0; i < MAX_MATERIAS; ++i)
-		{
-			if (_inventory[i] != NULL)
-				delete _inventory[i];
-			if (rhs._inventory[i])
-				_inventory[i] = rhs._inventory[i]->clone();
-			else
-				_inventory[i] = NULL;
-		}
-	}
-	return *this;
-}
-
-MateriaSource::~MateriaSource()
-{
-	std::cout << "MateriaSource destructor called." << std::endl;
-	for (int i = 0; i < MAX_MATERIAS; ++i)
-	{
-		if (_inventory[i])
-			delete _inventory[i];
-	}
-}
-
-// This is the laboratory where the MateriaSource learns a new Materia, that means a Matria is cloned and stored in the
-// inventory. The Materia passed is always of type Ice or Cure.
-void MateriaSource::learnMateria(AMateria *m)
-{
-	int i = 0;
-	while (i < MAX_MATERIAS && _inventory[i])
-	{
-		if (!_inventory[i])
-		{
-			_inventory[i] = m->clone();
-			std::cout << "Materia \"learned\". Whatever this means!" << std::endl;
-			break;
-		}
-	}
-	if (i == MAX_MATERIAS)
-	{
-		std::cout << "Inventory is full. Cannot learn more Materias." << std::endl;
-	}
-}
-
-// We are just returning a clone of the Materia that is in the inventory. If the Materia is not found, we return NULL.
-AMateria *MateriaSource::createMateria(std::string const &type)
-{
-	for (int i = 0; i < MAX_MATERIAS; ++i)
-	{
-		if (_inventory[i] && _inventory[i]->getType() == type)
-		{
-			std::cout << "Materia " << type << " created." << std::endl;
-			return _inventory[i]->clone();
-		}
-	}
-	std::cout << "Materia " << type << " not found." << std::endl;
-	return NULL;
-}
-#ifndef MATERIASOURCE_HPP
-#define MATERIASOURCE_HPP
-
-#include "IMateriaSource.hpp"
-#include "AMateria.hpp"
-
-class MateriaSource : public IMateriaSource
-{
-  private:
-	static const int MAX_MATERIAS = 4;
-	AMateria *_inventory[MAX_MATERIAS]; // Inventory of learned Materias
-
-  public:
-	MateriaSource();
-	MateriaSource(const MateriaSource &src);
-	MateriaSource &operator=(const MateriaSource &rhs);
-	virtual ~MateriaSource();
-	// learnMateira is the laboratory where the MateriaSource learns a new Materia
-	virtual void learnMateria(AMateria *);
-	virtual AMateria *createMateria(std::string const &type);
-};
-
 #endif
-#include "MateriaSource.hpp"
-#include "Character.hpp"
-#include "Ice.hpp"
-#include "Cure.hpp"
-#include <iostream>
-
-int main()
-{
-	IMateriaSource *src = new MateriaSource();
-	src->learnMateria(new Ice());
-	src->learnMateria(new Cure());
-	ICharacter *me = new Character("me");
-	AMateria *tmp;
-	tmp = src->createMateria("ice");
-	me->equip(tmp);
-	tmp = src->createMateria("cure");
-	me->equip(tmp);
-	ICharacter *bob = new Character("bob");
-	me->use(0, *bob);
-	me->use(1, *bob);
-	delete bob;
-	delete me;
-	delete src;
-
-	return 0;
-}
