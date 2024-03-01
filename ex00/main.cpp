@@ -31,14 +31,25 @@ int main()
 	std::cout << "***const WrongAnimal *meta2 = new WrongAnimal();***" << std::endl;
 	const WrongAnimal *meta2 = new WrongAnimal();
 	std::cout << "***const WrongAnimal *j2 = new WrongCat();***" << std::endl;
-	const WrongAnimal *j2 = new WrongCat();
+	const WrongAnimal *i2 = new WrongCat();
+	std::cout << "***const WrongAnimal *j3 = new WrongCat();***" << std::endl;
+	const WrongCat *i3 = new WrongCat();
 
 	std::cout << "***std::cout << j2->getType() << std::endl;***" << std::endl;
-	std::cout << j2->getType() << " " << std::endl;
+	std::cout << i2->getType() << " " << std::endl;
 	std::cout << "***j2->makeSound();***" << std::endl;
-	j2->makeSound();
+	i2->makeSound();
 	std::cout << "***meta2->makeSound();***" << std::endl;
 	meta2->makeSound();
+	std::cout << "***j3->makeSound();***" << std::endl;
+	i3->makeSound();
+
+	std::cout << "\n---- Small Extra Test ----\n" << std::endl;
+
+	std::cout << "***const Animal *i4 = new Cat();***" << std::endl;
+	const Cat *i4 = new Cat;
+	std::cout << "***i4->makeSound();***" << std::endl;
+	i4->makeSound();
 
 	return (0);
 }

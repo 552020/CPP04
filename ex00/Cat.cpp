@@ -1,16 +1,12 @@
 #include "Cat.hpp"
 #include <iostream>
 
+// Default constructor
 Cat::Cat()
 {
 	type = "Cat";
 	std::cout << "Cat default constructor called" << std::endl;
 }
-// Default constructor
-// Cat::Cat() : Animal("Cat")
-// {
-// 	std::cout << "Cat default constructor called" << std::endl;
-// }
 // Copy constructor
 Cat::Cat(const Cat &source) : Animal(source)
 {
@@ -27,14 +23,12 @@ Cat &Cat::operator=(const Cat &source)
 	}
 	return *this;
 }
-
 // Destructor
 Cat::~Cat()
 {
 	std::cout << "Cat destructor called" << std::endl;
 }
 
-// Member functions
 void Cat::makeSound() const
 {
 	std::cout << "Miao" << std::endl;
