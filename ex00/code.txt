@@ -1,0 +1,348 @@
+#include "Animal.hpp"
+
+#include <iostream>
+
+Animal::Animal() : type("Animal")
+{
+	std::cout << "Animal default constructor called" << std::endl;
+}
+Animal::Animal(std::string type) : type(type)
+{
+	std::cout << "Animal type constructor called" << std::endl;
+}
+
+Animal::Animal(const Animal &source) : type(source.type)
+{
+	std::cout << "Animal copy constructor called" << std::endl;
+}
+
+Animal &Animal::operator=(const Animal &source)
+{
+	std::cout << "Animal assignment operator called" << std::endl;
+	if (this != &source)
+	{
+		this->type = source.type;
+	}
+	return *this;
+}
+
+Animal::~Animal()
+{
+	std::cout << "Animal destructor called" << std::endl;
+}
+
+void Animal::makeSound() const
+{
+	std::cout << "Braak braak (Random Animal sound)" << std::endl;
+}
+
+std::string Animal::getType() const
+{
+	return this->type;
+}#ifndef ANIMAL_HPP
+#define ANIMAL_HPP
+
+#include <string>
+
+class Animal
+{
+  protected:
+	std::string type;
+
+  public:
+	Animal();
+	Animal(std::string type);
+	Animal(const Animal &source);
+	Animal &operator=(const Animal &source);
+	virtual ~Animal();
+	std::string getType() const;
+	virtual void makeSound() const;
+};
+
+#endif#include "Cat.hpp"
+#include <iostream>
+
+Cat::Cat()
+{
+	type = "Cat";
+	std::cout << "Cat default constructor called" << std::endl;
+}
+// Default constructor
+// Cat::Cat() : Animal("Cat")
+// {
+// 	std::cout << "Cat default constructor called" << std::endl;
+// }
+// Copy constructor
+Cat::Cat(const Cat &source) : Animal(source)
+{
+	std::cout << "Cat copy constructor called" << std::endl;
+}
+// Assignment operator overload
+Cat &Cat::operator=(const Cat &source)
+{
+	Animal::operator=(source);
+	std::cout << "Cat assignment operator called" << std::endl;
+	if (this != &source)
+	{
+		this->type = source.type;
+	}
+	return *this;
+}
+
+// Destructor
+Cat::~Cat()
+{
+	std::cout << "Cat destructor called" << std::endl;
+}
+
+// Member functions
+void Cat::makeSound() const
+{
+	std::cout << "Miao" << std::endl;
+}#ifndef CAT_HPP
+#define CAT_HPP
+
+#include "Animal.hpp"
+
+class Cat : public Animal
+{
+  public:
+	Cat();
+	Cat(const Cat &source);
+	Cat &operator=(const Cat &source);
+	virtual ~Cat();
+	virtual void makeSound() const;
+};
+
+#endif#include "Dog.hpp"
+
+#include <iostream>
+
+Dog::Dog()
+{
+	type = "Dog";
+	std::cout << "Dog default constructor called" << std::endl;
+}
+Dog::Dog(const Dog &source) : Animal(source)
+{
+	// we don't need to specify the type here, because it's already done in the base class. The type is copied from the
+	// base class, and since the base class is already initialized with a "Dog" type, we don't need to do it again here.
+	std::cout << "Dog copy constructor called" << std::endl;
+}
+Dog &Dog::operator=(const Dog &source)
+{
+	Animal::operator=(source);
+	std::cout << "Dog assignment operator called" << std::endl;
+	if (this != &source)
+	{
+		this->type = source.type;
+	}
+	return *this;
+}
+
+Dog::~Dog()
+{
+	std::cout << "Dog destructor called" << std::endl;
+}
+
+void Dog::makeSound() const
+{
+	std::cout << "Bau Bau" << std::endl;
+}
+#ifndef DOG_HPP
+#define DOG_HPP
+
+#include "Animal.hpp"
+#include <string>
+
+class Dog : public Animal
+{
+  public:
+	Dog();
+	Dog(const Dog &source);
+	Dog &operator=(const Dog &source);
+	virtual ~Dog();
+	virtual void makeSound() const;
+};
+
+#endif# Compiler and Flags
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+DEPFLAGS = -MMD -MP
+
+# Target executable name
+TARGET = animal
+
+# Source and Object Files
+SRCS = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
+
+# Create an obj directory if it doesn't exist
+OBJDIR = obj
+
+# Generate object files from source files in the obj directory
+OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
+
+# Define dependency files
+DEPS = $(OBJS:.o=.d) 
+
+# Build Rules
+
+all: $(TARGET)
+
+
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+
+$(OBJS): | $(OBJDIR)
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+# Compile source files to object files in the obj directory
+$(OBJDIR)/%.o: %.cpp
+	$(CXX) $(CXXFLAGS) $(DEPFLAGS)  -c $< -o $@
+
+# Include the dependency files
+-include $(DEPS)
+
+clean:
+	rm -f $(OBJS) $(TARGET) 
+
+fclean: clean
+	rm -rf $(OBJDIR)
+	rm -f $(TARGET) 
+
+re: fclean all
+
+.PHONY: all  clean fclean re
+#include "WrongAnimal.hpp"
+#include <iostream>
+
+WrongAnimal::WrongAnimal() : type("WrongAnimal")
+{
+	std::cout << "WrongAnimal default constructor called" << std::endl;
+}
+WrongAnimal::WrongAnimal(const WrongAnimal &source) : type(source.type)
+{
+	std::cout << "WrongAnimal copy constructor called" << std::endl;
+}
+
+WrongAnimal &WrongAnimal::operator=(const WrongAnimal &source)
+{
+	std::cout << "WrongAnimal assignment operator called" << std::endl;
+	if (this != &source)
+	{
+		this->type = source.type;
+	}
+	return *this;
+}
+
+WrongAnimal::~WrongAnimal()
+{
+	std::cout << "WrongAnimal destructor called" << std::endl;
+}
+
+void WrongAnimal::makeSound() const
+{
+	std::cout << "Craa Craa" << std::endl;
+}
+
+std::string WrongAnimal::getType() const
+{
+	return type;
+}
+void WrongAnimal::setType(std::string type)
+{
+	this->type = type;
+}
+#ifndef WRONGANIMAL_HPP
+#define WRONGANIMAL_HPP
+
+#include <iostream>
+class WrongAnimal
+{
+  private:
+	std::string type;
+
+  public:
+	WrongAnimal();
+	WrongAnimal(const WrongAnimal &source);
+	WrongAnimal &operator=(const WrongAnimal &source);
+	virtual ~WrongAnimal();
+
+	virtual void makeSound() const;
+	std::string getType() const;
+	void setType(std::string type);
+};
+
+#endif
+#include "WrongCat.hpp"
+#include "WrongAnimal.hpp"
+
+#include <iostream>
+
+WrongCat::WrongCat()
+{
+	WrongAnimal::setType("WrongCat");
+	std::cout << "WrongCat default constructor called" << std::endl;
+}
+WrongCat::WrongCat(const WrongCat &source) : WrongAnimal(source)
+{
+	std::cout << "WrongCat copy constructor called" << std::endl;
+}
+WrongCat &WrongCat::operator=(const WrongCat &source)
+{
+	std::cout << "WrongCat assignment operator called" << std::endl;
+	if (this != &source)
+	{
+		WrongAnimal::operator=(source);
+	}
+	return *this;
+}
+
+WrongCat::~WrongCat()
+{
+	std::cout << "WrongCat destructor called" << std::endl;
+}#ifndef WRONGCAT_HPP
+#define WRONGCAT_HPP
+
+#include "WrongAnimal.hpp"
+class WrongCat : public WrongAnimal
+{
+  public:
+	WrongCat();
+	WrongCat(const WrongCat &source);
+	WrongCat &operator=(const WrongCat &source);
+	virtual ~WrongCat();
+};
+
+#endif#include "Animal.hpp"
+#include "Cat.hpp"
+#include "Dog.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
+
+#include <iostream>
+
+int main()
+{
+	const Animal *meta = new Animal();
+	const Animal *j = new Dog();
+	const Animal *i = new Cat();
+
+	const WrongAnimal *meta2 = new WrongAnimal();
+	const WrongAnimal *j2 = new WrongCat();
+
+	std::cout << j->getType() << " " << std::endl; // will output the dog's type
+	std::cout << i->getType() << " " << std::endl; // will output the cat's type
+	i->makeSound();								   // will output the cat sound!
+	j->makeSound();
+	meta->makeSound();
+
+	std::cout << j2->getType() << " " << std::endl; // will output the dog's type
+	j2->makeSound();
+	std::cout << meta2->getType() << " " << std::endl; // will output the cat's type
+	meta2->makeSound();
+
+	return (0);
+}

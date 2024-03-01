@@ -1,7 +1,7 @@
 #include "WrongAnimal.hpp"
 #include <iostream>
 
-WrongAnimal::WrongAnimal() : type("WrongAnimal")
+WrongAnimal::WrongAnimal() : type("")
 {
 	std::cout << "WrongAnimal default constructor called" << std::endl;
 }
@@ -27,7 +27,7 @@ WrongAnimal::~WrongAnimal()
 
 void WrongAnimal::makeSound() const
 {
-	std::cout << "Craa Craa" << std::endl;
+	std::cout << "Braak braak (Random Animal sound)" << std::endl;
 }
 
 std::string WrongAnimal::getType() const
