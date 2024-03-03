@@ -28,4 +28,4 @@ class Debug
 	static void log(const std::string &message, Debug::Level paramLevel);
 };
 
-#endif // DEBUG_HPP
+#endif

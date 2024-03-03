@@ -24,6 +24,7 @@ MateriaSource::MateriaSource(const MateriaSource &src)
 	Debug::log("COPY CONSTRUCTOR END!", Debug::OCF);
 	Debug::log("A new MateriaSource has been created with the copy constructor", Debug::OCF);
 }
+
 // Using here another denominator for parameter name. Normally I have src or other. Here I have rhs.
 MateriaSource &MateriaSource::operator=(const MateriaSource &rhs)
 {

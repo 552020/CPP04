@@ -2,6 +2,8 @@
 #include "AMateria.hpp"
 #include "Debug.hpp"
 #include <iostream>
+#include <sstream> // for std::ostringstream
+
 
 Character::Character(const std::string &name) : _name(name)
 {
@@ -79,15 +81,10 @@ void Character::unequip(int idx)
 	if (idx >= 0 && idx < _inventorySize)
 	{
 		_inventory[idx] = NULL;
-		// Just remove from _inventory without deleting
-		// But we need to keep track of it to we can delete it in the destructor
-		// This will happen automatically when the Character is destroyed?
-		// No.
-		// But this will happen automatically when the Materia is destroyed?
-		// No, cause AMateria has to be manually created and destroyed.
-		// There can be the case that a Character is destroyed, and therefore also the Materia in its inventory.
-		// So before deleting the Materia, we need to check if it is not NULL.
-		std::string message = "Materia at index " + std::to_string(idx) + " has been unequipped.";
+		std::ostringstream oss;
+oss << "Materia at index " << idx << " has been unequipped.";
+std::string message = oss.str();
+
 		Debug::log(message, Debug::NORMAL);
 	}
 	else
@@ -102,7 +99,10 @@ void Character::use(int idx, ICharacter &target)
 		if (_inventory[idx] != NULL)
 			_inventory[idx]->use(target);
 		else
-			std::cout << "No materia at that index " << idx << "." << std::endl;
+		{
+			std::ostringstream oss;
+			oss << "Materia at index " << idx << " is NULL.";
+		}
 	else
 		std::cout << "Invalid index." << std::endl;
 }
@@ -123,7 +123,9 @@ void Character::deepCopyInventory(const Character &other)
 		}
 		j++;
 	}
-	std::string message = "A new inventory has been created with " + std::to_string(j) + " materias.";
+	std::ostringstream oss;
+	oss << "A new inventory has been created with " << j << " materias.";
+	std::string message = oss.str();
 	Debug::log("Deep copying inventory END", Debug::OCF);
 	Debug::log(message, Debug::OCF);
 }
