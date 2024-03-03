@@ -31,7 +31,6 @@ void test_debug()
 	Debug::log("This is a OCF message.", Debug::OCF);
 }
 
-
 void test_amateria()
 {
 	std::cout << "Amateria is an abstract class, so we can't create an instance of it.\n";
@@ -39,7 +38,6 @@ void test_amateria()
 	// AMateria *materia = new AMateria("test");
 	// delete materia;
 }
-
 
 void test_Character()
 {
@@ -85,7 +83,6 @@ void test_Character()
 	std::cout << "\nTesting complete." << std::endl;
 	std::cout << "Cleaning up..." << std::endl;
 }
-
 
 void test_MateriaSource()
 {
@@ -155,7 +152,7 @@ void test_MateriaSource()
 
 void test_clone_random()
 {
- // Seed the random number generator
+	// Seed the random number generator
 	srand(static_cast<unsigned int>(time(NULL)));
 	AMateria *materia = NULL;
 	AMateria *clonedMateria = NULL;
@@ -163,8 +160,8 @@ void test_clone_random()
 	std::cout << "Testing clone functionality and polymorphism:" << std::endl;
 
 	// Example using random choice
-// Randomly choose 0 (Ice) or 1 (Cure)
-	int choice = rand() % 2; 
+	// Randomly choose 0 (Ice) or 1 (Cure)
+	int choice = rand() % 2;
 
 	if (choice == 0)
 	{
@@ -221,7 +218,6 @@ void test_clone_user_input()
 	delete materia;
 	delete clonedMateria;
 }
-
 
 void test_ice()
 {
@@ -296,11 +292,10 @@ void test()
 
 	ICharacter *target = new Character("Villain");
 	std::cout << "Hero uses his materias on Villain:\n";
-	hero->use(0, *target); 
-	hero->use(1, *target); 
+	hero->use(0, *target);
+	hero->use(1, *target);
 
 	delete target;
 	delete hero;
 	delete src;
-
 }

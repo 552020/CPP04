@@ -4,7 +4,6 @@
 #include <iostream>
 #include <sstream> // for std::ostringstream
 
-
 Character::Character(const std::string &name) : _name(name)
 {
 	for (int i = 0; i < _inventorySize; ++i)
@@ -82,8 +81,8 @@ void Character::unequip(int idx)
 	{
 		_inventory[idx] = NULL;
 		std::ostringstream oss;
-oss << "Materia at index " << idx << " has been unequipped.";
-std::string message = oss.str();
+		oss << "Materia at index " << idx << " has been unequipped.";
+		std::string message = oss.str();
 
 		Debug::log(message, Debug::NORMAL);
 	}

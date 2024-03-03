@@ -8,7 +8,7 @@ class MateriaSource : public IMateriaSource
 {
   private:
 	static const int MAX_MATERIAS = 4;
-	AMateria *_inventory[MAX_MATERIAS]; 
+	AMateria *_inventory[MAX_MATERIAS];
 
   public:
 	MateriaSource();

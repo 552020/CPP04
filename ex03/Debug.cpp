@@ -1,7 +1,7 @@
 #include "Debug.hpp"
 
 bool Debug::debugEnabled = false;
-Debug::Level Debug::debugLevel = Debug::NORMAL; 
+Debug::Level Debug::debugLevel = Debug::NORMAL;
 
 Debug::Debug()
 {
