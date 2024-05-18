@@ -1,5 +1,7 @@
 # CPP04
 
+**C++ module for the core curriculum @42Berlin**
+
 ## ex01
 
 ## ex02
